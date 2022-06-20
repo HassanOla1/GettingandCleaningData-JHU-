@@ -23,6 +23,7 @@ subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt", header = F
 x_test <- read.table("./UCI HAR Dataset/test/X_test.txt",header = FALSE)
 y_test <- read.table("./UCI HAR Dataset/test/y_test.txt",header = FALSE)
 
+# Assigin column names to the data imported above
 colnames(features) <- c("id", "feature")
 colnames(activity_labels) <- c("labels", "activityN")
 colnames(subject_train) <- "subject"

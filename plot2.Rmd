@@ -1,0 +1,32 @@
+---
+title: "Exploratory Data Analysis"
+---
+
+
+```{r}
+namefile <- "epower_consumption.zip"
+urlfile <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+#load package
+library(data.table)
+# load data
+if (!file.exists(namefile)){
+  download.file(urlfile, destfile = namefile)
+  unzip(namefile)
+}
+householdConsumption<- fread("household_power_consumption.txt", na.strings = "?")
+```
+
+## subsetting data
+```{r}
+dates <- c("1/2/2007","2/2/2007")
+householdConsumption <- householdConsumption[householdConsumption$Date %in% dates,]
+timedat <- strptime(paste(householdConsumption$Date,householdConsumption$Time, sep = ""), "%d/%m/%Y %H:%M:%S")
+activeG <- as.numeric(householdConsumption$Global_active_power)
+```
+## ploting to png2
+```{r}
+png("plot2.png")
+
+plot(timedat,activeG, type = "l", xlab = "", ylab = "Global Active Power(kilowatts) ")
+dev.off()
+```
